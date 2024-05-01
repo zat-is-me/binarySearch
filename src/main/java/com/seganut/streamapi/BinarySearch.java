@@ -2,36 +2,34 @@ package com.seganut.streamapi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BinarySearch {
-    static volatile boolean found;
-
     public static void main(String[] args) {
-        int num = 11;
-        List<Integer> data = new ArrayList<>();
-        data.add(1);
-        data.add(2);
-        data.add(3);
-        data.add(4);
-        data.add(5);
-        data.add(7);
-        data.add(9);
-        data.add(10);
-        data.add(8);
-        data.add(6);
-        List<Integer> sorted = data.stream().sorted().collect(Collectors.toList());
+        int desireValue = 0;
+        int [] arr = {1,2,16,4,18,6,7,8,10,9,11,12,13,14,15,13,17,5,19,20};
+        List<Integer> data = Arrays
+                .stream(arr)
+                .boxed()
+                .sorted()
+                .collect(Collectors.toList());
 
-        System.out.println(numSearch(sorted, num));
+//        How much time it take to find the desire number
+        Date startTime = new Date(System.currentTimeMillis());/*Start time*/
+        System.out.println("\n"+(numSearch(data, desireValue)));/*Work*/
+        Date endTime = new Date(System.currentTimeMillis());/*End time*/
+
+        System.out.println("It took: "+(endTime.getTime() - startTime.getTime()));
     }
 
     private static String numSearch(List<Integer> data, Integer desireValue) {
         int start = 0;
         int end = data.size() -1  ;
 
-        while (start <= end){
+        while (start <= end ){
             int halfPosition = (start + end)/2;
             int middleValue = data.get(halfPosition);
 
